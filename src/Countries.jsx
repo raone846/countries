@@ -11,9 +11,9 @@ function Countries() {
     const fetchCountries = async () => {
       try {
         const response = await fetch(API_URL);
-        if (!response.ok) {
+        /*if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        }*/
         const data = await response.json();
         const uniqueCountries = data.filter(
           (country, index, self) =>
