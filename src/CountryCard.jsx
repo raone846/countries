@@ -18,7 +18,7 @@ function CountryCard({ flagUrl, name }) {
       }}
     >
       <img src={flagUrl} alt={name} width="150px" height="100px" />
-      <h2>{name}</h2>
+      <h3>{name}</h3>
     </div>
   );
 }
