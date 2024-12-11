@@ -8,9 +8,13 @@ function Countries() {
   const [filteredCountries, setFilteredCountries] = useState([]);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
         const uniqueCountries = data.filter(
           (country, index, self) =>
             self.findIndex((c) => c.cca3 === country.cca3) === index
@@ -21,15 +25,19 @@ function Countries() {
           abbr: country.cca3,
         }));
         setCountries(mappedCountries);
-        setFilteredCountries(mappedCountries); // Initialize filtered countries
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+        setFilteredCountries(mappedCountries);
+      } catch (error) {
+        console.error("Error fetching data:", error); // Logs errors to the console
+      }
+    };
+
+    fetchCountries();
   }, []);
 
   const handleSearch = (query) => {
     const lowercasedQuery = query.toLowerCase();
     const filtered = countries.filter((country) =>
-      country.name.toLowerCase().includes(lowercasedQuery)
+      country.name.toLowerCase().startsWith(lowercasedQuery)
     );
     setFilteredCountries(filtered);
   };
