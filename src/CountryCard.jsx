@@ -3,6 +3,7 @@ import React from 'react';
 function CountryCard({ flagUrl, name }) {
   return (
     <div
+      className="countryCard"
       style={{
         display: "flex",
         flexDirection: "column",

@@ -23,7 +23,7 @@ function Countries() {
         setCountries(mappedCountries);
         setFilteredCountries(mappedCountries); // Initialize filtered countries
       })
-      .catch((error) => console.error("Error fetching data: " + error));
+      .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   const handleSearch = (query) => {
@@ -43,7 +43,6 @@ function Countries() {
           flexWrap: "wrap",
           gap: "10px",
           justifyContent: "center",
-          alignContent: "center",
           margin: "10px",
         }}
       >
