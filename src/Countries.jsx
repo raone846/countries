@@ -37,7 +37,7 @@ function Countries() {
   const handleSearch = (query) => {
     const lowercasedQuery = query.toLowerCase();
     const filtered = countries.filter((country) =>
-      country.name.toLowerCase().included(lowercasedQuery)
+      country.name.toLowerCase().includes(lowercasedQuery)
     );
     setFilteredCountries(filtered);
   };
