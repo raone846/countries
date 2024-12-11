@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 function CountryCard({ flagUrl, name }) {
   return (
-    <div style={{
+    <div
+      style={{
         display: "flex",
         flexDirection: "column",
         border: "1px solid grey",
@@ -12,12 +13,13 @@ function CountryCard({ flagUrl, name }) {
         padding: "10px",
         justifyContent: "center",
         alignItems: "center",
-        textAlign: "center"
-    }}>
-        <img src={flagUrl} alt={name} width="150px" height="100px"/>
-        <h2>{name}</h2>
+        textAlign: "center",
+      }}
+    >
+      <img src={flagUrl} alt={name} width="150px" height="100px" />
+      <h2>{name}</h2>
     </div>
-  )
+  );
 }
 
-export default CountryCard
+export default CountryCard;

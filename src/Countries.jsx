@@ -3,7 +3,7 @@ import CountryCard from './CountryCard';
 import SearchBar from './SearchBar';
 
 function Countries() {
-  const API_URL = "https://xcountries-backend.azurewebsites.net/all";
+  const API_URL = "https://restcountries.com/v3.1/all";
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
 
@@ -13,14 +13,18 @@ function Countries() {
       .then((data) => {
         const uniqueCountries = data.filter(
           (country, index, self) =>
-            self.findIndex((c) => c.abbr === country.abbr) === index
+            self.findIndex((c) => c.cca3 === country.cca3) === index
         );
-        setCountries(uniqueCountries);
-        setFilteredCountries(uniqueCountries); // Initialize filtered countries
+        const mappedCountries = uniqueCountries.map((country) => ({
+          name: country.name.common,
+          flag: country.flags.svg || country.flags.png,
+          abbr: country.cca3,
+        }));
+        setCountries(mappedCountries);
+        setFilteredCountries(mappedCountries); // Initialize filtered countries
       })
       .catch((error) => console.error("Error fetching data: " + error));
   }, []);
-  
 
   const handleSearch = (query) => {
     const lowercasedQuery = query.toLowerCase();
@@ -29,10 +33,6 @@ function Countries() {
     );
     setFilteredCountries(filtered);
   };
-  
-
-  //console.log(filteredCountries);
-  
 
   return (
     <div>
